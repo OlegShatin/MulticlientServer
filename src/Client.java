@@ -1,12 +1,14 @@
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  * @author Oleg Shatin
  *         11-501
  */
 public class Client implements Runnable {
+    private Scanner scanner;
+
     public void run() {
         int port = 3456;
         String host = "localhost";
@@ -15,9 +17,17 @@ public class Client implements Runnable {
             s = new Socket(host, port);
 
             while (true) {
-                InputStream is = s.getInputStream();
-                int x = is.read();
-                System.out.println(name+": " + x);
+
+                //send
+                System.out.print("enter mess:");
+                String message = scanner.nextLine();
+                PrintWriter printWriter = new PrintWriter(s.getOutputStream(), true);
+                printWriter.println(message);
+                //get
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                String x = bufferedReader.readLine();
+                System.out.println("from net: "+ x);
+
 
             }
         } catch (IOException e) {
@@ -32,8 +42,10 @@ public class Client implements Runnable {
 // создаем поток, передавая поведение
         // нашего MyAwesomeThread
         thread = new Thread(this);
+        scanner = new Scanner(System.in);
         thread.start();
         this.name = name;
+
     }
 
     public static void main(String[] args) {
