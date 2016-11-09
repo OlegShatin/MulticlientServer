@@ -16,18 +16,19 @@ public class Client implements Runnable {
         try {
             s = new Socket(host, port);
 
+            PrintWriter printWriter = new PrintWriter(s.getOutputStream(),true);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            Scanner sc = new Scanner(System.in);
             while (true) {
-
                 //send
                 System.out.print("enter mess:");
                 String message = scanner.nextLine();
-                PrintWriter printWriter = new PrintWriter(s.getOutputStream(), true);
+                printWriter = new PrintWriter(s.getOutputStream(), true);
                 printWriter.println(message);
                 //get
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                bufferedReader = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 String x = bufferedReader.readLine();
                 System.out.println("from net: "+ x);
-
 
             }
         } catch (IOException e) {

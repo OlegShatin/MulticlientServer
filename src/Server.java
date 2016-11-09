@@ -1,5 +1,4 @@
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.Scanner;
  * @author Oleg Shatin
  *         11-501
  */
+
 public class Server implements Runnable {
 
 
@@ -20,6 +20,7 @@ public class Server implements Runnable {
         connections  = new ArrayList<>();
         thread = new Thread(this);
         thread.start();
+
     }
     public ArrayList<Connection> getConnections() {
         return connections;
