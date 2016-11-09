@@ -25,14 +25,14 @@ public class Connection implements Runnable {
 
                 String message = bufferedReader.readLine();
                 System.out.println(message);
-                for (Connection anotherClientConn: server.getConnections()) {
+                for (Connection anotherClientConn : server.getConnections()) {
 
                     printWriter = new PrintWriter(anotherClientConn.getSocket().getOutputStream(), true);
                     printWriter.println(message);
 
                 }
             }
-        } catch (IOException e) {
+        }catch(IOException e){
             e.printStackTrace();
         }
 

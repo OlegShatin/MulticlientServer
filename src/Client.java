@@ -23,10 +23,8 @@ public class Client implements Runnable {
                 //send
                 System.out.print("enter mess:");
                 String message = scanner.nextLine();
-                printWriter = new PrintWriter(s.getOutputStream(), true);
                 printWriter.println(message);
                 //get
-                bufferedReader = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 String x = bufferedReader.readLine();
                 System.out.println("from net: "+ x);
 
